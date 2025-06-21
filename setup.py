@@ -159,19 +159,24 @@ def make_asdk(fillout, remove, pkgdata):
 
 
 def make_bmc(fillout, remove, pkgdata):
+    print("Making BMC...")
     libname = r'^BMC[0-9]*\.lib$'
     tops = get_paths('bmc')
     try:
         lib_fname = find_file(tops, libname, expats=[])
         lib_path = path.dirname(lib_fname)
         lib_name = path.basename(lib_fname).replace('.lib', '')
+        print("Lib found:",lib_name)
     except ValueError:
+        print("bmc no file")
         return
 
-    iname = r'^BmcApi\.h$'
+    iname = r'^BMCApi\.h$'
     try:
         include_path = path.dirname(find_file(tops, iname, expats=[]))
     except ValueError:
+        print("bmc no file .h :",iname)
+
         return
 
     fillout.append(
@@ -343,7 +348,7 @@ for g in glob('devwraps\\*.pyx'):
 make_mirao52e(exts, remove, pkgdata)
 make_asdk(exts, remove, pkgdata)
 make_bmc(exts, remove, pkgdata)
-make_thorcam(exts, remove, pkgdata)
+#make_thorcam(exts, remove, pkgdata)
 make_ueye(exts, remove, pkgdata)
 make_sdk3(exts, remove, pkgdata)
 make_ximea(exts, remove, pkgdata)
