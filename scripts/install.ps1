@@ -1,7 +1,3 @@
-Activate-Anaconda
-if (-not $?) {
-	exit
-}
 pip uninstall -y devwraps
 if (-not $?) {
 	exit
